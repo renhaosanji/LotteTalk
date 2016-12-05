@@ -16,8 +16,8 @@ public class ContactsListCellRender implements ListCellRenderer {
 	public Component getListCellRendererComponent(JList list, Object value,
 			int index, boolean isSelected, boolean cellHasFocus) {
 		JLabel cellComp = new JLabel();
-		ImageIcon offIcon=new ImageIcon("images/offline.jpg");
-		ImageIcon onIcon=new ImageIcon("images/online.jpg");
+		ImageIcon offIcon=new ImageIcon("images/offline.png");
+		ImageIcon onIcon=new ImageIcon("images/online.png");
 		if(value instanceof Contact){
 			Contact contact = (Contact)value;
 			int uid = contact.getUid();
@@ -28,9 +28,9 @@ public class ContactsListCellRender implements ListCellRenderer {
 				cellComp.setForeground(list.getSelectionForeground());
 				cellComp.setBackground(list.getSelectionBackground());
 			}
-			if(contact.getOnline()==1){                              //Ñ¡Ôñ×ÖÌåÑÕÉ«
+			if(contact.getOnline()==1){                              //Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
 				cellComp.setIcon(onIcon);
-				cellComp.setForeground(Color.GREEN);                 //Ñ¡Ôñ±³¾°ÑÕÉ«
+				cellComp.setForeground(Color.GREEN);                 //Ñ¡ï¿½ñ±³¾ï¿½ï¿½ï¿½É«
 				cellComp.setBackground(list.getBackground());
 			}else{
 				cellComp.setIcon(offIcon);
