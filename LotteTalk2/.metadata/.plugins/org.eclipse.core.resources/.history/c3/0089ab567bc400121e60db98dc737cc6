@@ -1,0 +1,72 @@
+package server;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+//import server.handler.RegRequestHandler;
+import server.handler.InitRequestHandler;
+import server.handler.LoginRequestHandler;
+import server.handler.LogoffRequestHandler;
+import server.handler.RegRequestHandler;
+import server.handler.RequestHandler;
+import entity.RequestObject;
+import entity.ResponseObject;
+
+public class WorkerThread extends Thread {
+	private Socket clientSocket;
+	private RequestHandler handler; //类变量，接口RequestHandler 的对象
+		
+	// TODO Auto-generated constructor stub
+	
+	 //WorkThread子类不能继承父类thread的构造器；
+	//只能在构造器中用super()调用父类的构造器
+	
+   public WorkerThread(Socket clientSocket) {
+		super();                          //子类的构造器首先要调用父类的构造器             
+		this.clientSocket = clientSocket;
+	}
+	
+   public void run(){
+		try{
+		  ObjectOutputStream oos;
+		  ObjectInputStream ois;
+		
+		  oos = new ObjectOutputStream(clientSocket.getOutputStream());
+		  ois = new ObjectInputStream(clientSocket.getInputStream());
+		  
+		  RequestObject requestObject = (RequestObject) ois.readObject();
+	      System.out.println(requestObject);
+	      
+		  ResponseObject responseObject=null;
+		   //todo: 
+	       switch (requestObject.getReqType()) {
+	       case RequestObject.REG_REQ:
+	    	   handler=new RegRequestHandler();
+	    	   break; 
+	      
+	       case RequestObject.INIT_REQ:
+	    	   handler=new InitRequestHandler();
+	    	   break; 
+	    	   
+	       case RequestObject.LOGIN_REQ:
+	    	   handler=new LoginRequestHandler();
+	    	   break; 
+	       case RequestObject.LOGOFF_REQ:
+	    	   handler=new LogoffRequestHandler();
+	    	   break; 
+	    
+		default:
+			
+			break;
+		}
+	          responseObject=
+	        		  handler.handleRequest(requestObject);
+	           oos.writeObject(responseObject);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+   }
+
