@@ -35,12 +35,12 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
 		this.boxRegistry=new Hashtable<Contact,ChatBox>();
 		
 		//////////////////////////////////////////////////17:43
-		//将boxRegistry中内容放到公共存储区——哈希表sysReg
+		//boxRegistrysysReg
 		SysRegistry.getSysReg().put("boxRegistry",this.boxRegistry);
 		setTitle(""+uid);
 		ListContacts.setCellRenderer(new ContactsListCellRender());
 		
-		//刷新
+		//
 		/******************26new*******************************************************/
 //		refreshContacts(true);
 //		initOfflineMsgs();
@@ -74,7 +74,7 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
 		bfContact=(Contact)contactsModel.elementAt(idx);
 		/**************************************/
 		ChatBox chatBox=null;
-		//只通过uid将发送方的信息chatInfo实体找到
+		//uid chatInfo
 		for (int i=0;i<allChats.size();i++){
 			chatInfo=(ChatInfo)allChats.elementAt(i);
 			senderId=chatInfo.getSenderId();
@@ -89,7 +89,7 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
 		}
 
 	/**********************26_11:46*****************************/
-	//////////////////////离线通信
+	//////////////////////锟斤拷锟斤拷通锟斤拷
 	
 	
 	private Contact getContactByuid(int uid,DefaultListModel Model){
@@ -109,7 +109,7 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
 				.sendRequest(requestObject);
 		Vector<Contact> allContacts = (Vector<Contact>) responseObject.getResBody();
 		int size = allContacts.size();
-		//注意：实例化 contactsModel！！！
+		//注锟解：实锟斤拷锟斤拷 contactsModel锟斤拷锟斤拷锟斤拷
 		
 		/**************************************************/
 		DefaultListModel oldModel=contactsModel;
@@ -121,7 +121,7 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
 		Contact contact = null;
 		Contact oldContact=null;
 		int tmpUid;
-		//对象拷贝,把vector的数据拷贝到Model中
+		//锟斤拷锟襟拷憋拷,锟斤拷vector锟斤拷锟斤拷锟捷匡拷锟斤拷锟斤拷Model锟斤拷
 		for (int i = 0; i < size; i++) {
 			contact = allContacts.elementAt(i);
 			tmpUid=contact.getUid();
@@ -151,7 +151,7 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
 			}
 		}
 		this.ListContacts.setModel(contactsModel);
-		//refresh 之后，将contactsModel中内容放到公共存储区中
+		//refresh contactsModel
 		SysRegistry.getSysReg().put("contactsModel", contactsModel);
 	}
 
@@ -210,17 +210,17 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
 		pack();
 	}// </editor-fold>
 	//GEN-END:initComponents
-/***********************************第二件事情**********************************/
+/***********************************锟节讹拷锟斤拷锟斤拷锟斤拷**********************************/
 	private void ListContactsMouseClicked(java.awt.event.MouseEvent evt) {
 		// TODO add your handling code here:
 		
-		//排序后，将自己屏蔽
+		//
 		if(evt.getClickCount()==2){
 			if(ListContacts.getSelectedIndex()==0)
 				return;
 			
 			Contact bfContact,gfContact;
-			//获取gf实体的信息
+			//
 			gfContact=(Contact)
 			  		ListContacts.getSelectedValue();
 			    
@@ -250,7 +250,7 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
 		if(chatBox==null)
 		{
 		chatBox=new ChatBox(bfContact,gfContact);
-	//记录其他人的窗口！！！
+	//
 		boxRegistry.put(gfContact,chatBox);
 	}
 		} catch (Exception e) {
@@ -263,7 +263,7 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
 	/*************************************formWindowClosing****************************/
 	private void formWindowClosing(java.awt.event.WindowEvent evt) {
 		// TODO add your handling code here:
-		//传uid
+		//uid
 		RequestObject requestObject = new RequestObject(
 				RequestObject.LOGOFF_REQ, this.currUID + "");
 
@@ -290,7 +290,7 @@ public class MainForm extends javax.swing.JFrame implements ActionListener {
 	// End of variables declaration//GEN-END:variables
 
 	/****************************************************************************************************************/
-	//定义一个Model
+	//Model
 	private DefaultListModel contactsModel;
 	//
 

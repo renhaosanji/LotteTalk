@@ -12,13 +12,12 @@ public PeerWorkerThread(Socket peerSocket) {
 	super();
 	this.peerSocket = peerSocket;
 }
-//从SOCKET中读东西，
+//SOCKET
 public void run(){
 	try{
 		
 		
-	//对象的包装
-	//InputStream 处理的是ByteArray数据
+	
 	ObjectInputStream ois=
 			new ObjectInputStream(
 			peerSocket.getInputStream());
@@ -28,7 +27,7 @@ public void run(){
 	case NotifyObject.TEXT_MSG:
 		handler=new TesxMsgHandler();
 		break;
-	//留作之后的扩展
+	//
 	default:
 		break;
 	}

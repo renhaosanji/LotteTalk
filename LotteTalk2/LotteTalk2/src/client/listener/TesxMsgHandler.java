@@ -16,7 +16,7 @@ public class TesxMsgHandler implements EventHandler {
 			ChatInfo chatInfo=(ChatInfo)notifyObject.getNotifyBody();
 			
 ////			System.out.println(chatInfo);
-//			Java 自动回收机制，打印后chatInfo对象被回收???
+//			Java chatInfo
 			
 			/////////////////////////////////////////////////////////////
 			////////////////17:47////////////////////////////////////////
@@ -36,7 +36,7 @@ public class TesxMsgHandler implements EventHandler {
 				}
 			chatBox.appendMsg(chatInfo.getContent());
 			System.out.println(chatInfo);
-			System.out.println("****************************在线聊天************************");
+			System.out.println("****************************************************");
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -44,7 +44,7 @@ public class TesxMsgHandler implements EventHandler {
 		}
 	}
 			
-	//////////////17:52_from MainForm private方法 getContactByuid 
+	//////////////17:52_from MainForm private  getContactByuid 
 	private Contact getContactByUid(int uid,DefaultListModel model){
 		Contact resultContact=null;
 		Contact tmpContact=new Contact();
